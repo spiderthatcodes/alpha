@@ -4,9 +4,9 @@ from .forms import TaskForm
 from .models import Task
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url="/accounts/login/")
 def create_task(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save(False)
@@ -14,18 +14,14 @@ def create_task(request):
     else:
         form = TaskForm()
 
-    context = {
-        "form": form
-    }
+    context = {"form": form}
 
     return render(request, "tasks/create.html", context)
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url="/accounts/login/")
 def show_my_tasks(request):
     tasks = Task.objects.filter(assignee=request.user)
-    context = {
-        "tasks": tasks
-    }
+    context = {"tasks": tasks}
 
     return render(request, "tasks/list.html", context)
