@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Project
 
@@ -11,3 +11,13 @@ def list_projects(request):
     }
 
     return render(request, 'projects/list.html', context)
+
+
+@login_required(login_url='/accounts/login/')
+def show_project(request, id):
+    project = get_object_or_404(Project, id=id)
+    context = {
+        "project": project
+    }
+
+    return render(request, "projects/details.html", context)

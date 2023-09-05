@@ -3,7 +3,7 @@ from .models import Task
 
 
 @admin.register(Task)
-class ProjectAdmin(admin.ModelAdmin):
+class TaskAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "id"
